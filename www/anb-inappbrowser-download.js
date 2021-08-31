@@ -103,8 +103,12 @@ exports.open = function (arg0, success, error) {
     var url = arg0.inAppBrowserUrl;
     var inAppBrowserOptions = arg0.inAppBrowserOptions;
     var buttonClassName = arg0.buttonClassName;
-
-    window.inAppBrowserRef = cordova.InAppBrowser.open(url, '_blank',  inAppBrowserOptions);
+	var targetSys = arg0.targetSystem;
+	if (!targetSys || targetSys.length == 0){
+		targetSys = '_blank';
+	}
+	
+    window.inAppBrowserRef = cordova.InAppBrowser.open(url, targetSys,  inAppBrowserOptions);
 
     //add viewport-fit=cover so we can fill the left and right sides of the notch (if it exists)
     var script = "var metaViewport = document.querySelector('meta[name=viewport]');" +
